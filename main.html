@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Click and Drag</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css"">
 </head>
 <body>
   <div class="items">
@@ -36,7 +36,7 @@
 
 <script>
 //Your code goes here 
-	const itemsConatiner = document.querySelector(".items");
+const itemsConatiner = document.querySelector(".items");
 let isDown = false;
 let startX;
 let scrollLeft;
@@ -48,16 +48,6 @@ itemsConatiner.addEventListener("mousedown",(e) => {
     startX = e.pageX - itemsConatiner.offsetLeft;
     scrollLeft = itemsConatiner.scrollLeft;
     itemsConatiner.classList.add("active");
-
-    // setTimeout(() => {
-    //     itemsConatiner.dispatchEvent(new MouseEvent("mousemove" , {
-    //         view : window,
-    //         bubbles : true,
-    //         canelable : true,
-    //         clinetX : 200,
-    //         clientY : 100,
-    //     }))
-    // },1000);
 });
 
 //when mouse is up we need to stop tracking
@@ -86,14 +76,6 @@ itemsConatiner.addEventListener("mousemove", (e) => {
     const x = e.pageX - itemsConatiner.offsetLeft;
     const wallk = (x-startX) * 2;// 
     itemsConatiner.scrollLeft = scrollLeft-wallk;
-
-    // setTimeout(()=>{
-    //     itemsConatiner.dispatchEvent(new MouseEvent("mouseup",{
-    //         view : window,
-    //         bubbles : true,
-    //         cancelable : true
-    //     }));
-    // },1000);
 });
 </script>
 
