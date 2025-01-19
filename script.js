@@ -1,26 +1,37 @@
-// Your code here.
-let pElements = document.getElementByClass("items");
-let parentElement = document.querySelector(".items");
+const itemsConatiner = document.querySelector(".items");
 let isDown = false;
 let startX;
 let scrollLeft;
 
-parentElement.eventListener('mousedown', (e) =>{
-	isDown = true;
-	pElements.classList.add("active");
-	startX = e.pageX - pElements.offSetLeft;
-	scrollLeft = e.scrollLeft;
+//When mouse down we need to track initial position
+itemsConatiner.addEventListener("mousedown",(e) => {
+    isDown = true;
+    startX = e.pageX - itemsConatiner.offsetLeft;
+    scrollLeft = itemsConatiner.scrollLeft;
+    itemsConatiner.classList.add("active");
 });
 
-parentElement.eventListener('mouseup', 'mouseleave' , (e) => {
-	isDown = false;
-	pElements.classList.remove("active");
+//when mouse is up we need to stop tracking
+itemsConatiner.addEventListener("mouseup" ,() => {
+    isDown = false;
+    itemsConatiner.classList.remove("active");
 });
 
-parentElement.eventListener('mousemove', (e) =>{
-	if(!isDown) return;
-	e.preventDefault();
-	const ex = e.pageX - pElements.offSetLeft;
-	const move = (x- startX)*2;
-	pElements.scrollLeft = scrollLeft - move;
+//when mouse leave we need to stop tracking
+itemsConatiner.addEventListener("mouseleave" , () =>{
+    isDown = false;
+    itemsConatiner.classList.remove("active");  
+});
+
+// when mouse is moving we need to adjust scroll position
+itemsConatiner.addEventListener("mousemove", (e) => {
+    if(!isDown){
+        return;
+    }
+
+    e.preventDefault();
+
+    const x = e.pageX - itemsConatiner.offsetLeft;
+    const wallk = (x-startX) * 2;// 
+    itemsConatiner.scrollLeft = scrollLeft-wallk;
 });
